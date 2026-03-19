@@ -60,13 +60,21 @@ nav{
 
 /*for city explorer */
 .citySquare {
-    flex: 1;
+    /* flex: 1;
     flex-direction: column;
-    display: flex;
+    display: flex; */
     justify-content: center;
     align-items: center;
-    margin: 50px;
+    margin: 20px;
     border: 2px solid black;
     border-radius: 5px;
-    padding: 50px;
+    padding: 20px;
+    width: 20%;
+    aspect-ratio: 1/1;
+    
+}
+
+.allsquares {
+    display: grid;
+    grid-template-columns: (20px 20px auto)
 }
