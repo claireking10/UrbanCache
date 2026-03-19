@@ -140,3 +140,4 @@ vite.config.ts.timestamp-*
 
 # Private .env files
 .env
+.DS_Store

@@ -1,6 +1,15 @@
-.body {
-    display: flex;
-    font-family: 'Courier New', Courier, monospace;
+/* for home*/
+body {
+    
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+nav{
+    
+    justify-content: center;
+    text-align: center;
+    gap: 24px;
+    
 }
 
 .homecontainer {
@@ -49,3 +58,15 @@
     border-radius: 8px;
 }
 
+/*for city explorer */
+.citySquare {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 50px;
+}

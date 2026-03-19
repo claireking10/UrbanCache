@@ -1,10 +1,11 @@
+require('dotenv').config();
 //app.js is the main server object that: defines routes, adds middleware, starts server
 
 //*this code imports these packages
 const express = require("express");
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const mysql = require('mysql2');
 
 //creating app as a express object
 const app = express();
@@ -20,10 +21,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+//database connection
+const db = mysql.createConnection( {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
+
+db.connect(err => {
+    if (err) {
+        console.error('Database connection failed:', err);
+    } else {
+        console.log('Connected to MySQL!');
+    }
+});
+
+//
 
 //route definition --> need this for each page
 app.get('/' , (req, res) => {
     res.render('home');
+});
+
+app.get('/cityExplorer',(req,res) =>{
+    db.query("SELECT * FROM cities", (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.render('cityExplorer', {cities: results})
+    });
+    
 });
 
 //activate the port to start server
