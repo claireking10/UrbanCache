@@ -18,8 +18,13 @@
 
     <div class = allsquares>
         <% cities.forEach(city => { %>
-        <div class = citySquare> <%=city.name%>  </div>
+        <div class = citySquare> 
+            <%=city.name%> 
+            <img class = cityimg src = <%=city.imagePath %> >
+            <%=city.population%> 
+        </div>
         <% }) %>
+        
     </div>
 
 

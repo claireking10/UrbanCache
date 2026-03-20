@@ -60,9 +60,9 @@ nav{
 
 /*for city explorer */
 .citySquare {
-    /* flex: 1;
+    flex: 1;
     flex-direction: column;
-    display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px;
@@ -74,7 +74,13 @@ nav{
     
 }
 
-.allsquares {
+.cityimg {
+    width: 250px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+/* .allsquares {
     display: grid;
     grid-template-columns: (20px 20px auto)
 }
+ */
