@@ -53,6 +53,19 @@ app.get('/cityExplorer',(req,res) =>{
     
 });
 
+// Route for viewing individual city info
+app.get('/city/name/:cityName', (req, res) => {
+    const cityName = req.params.cityName;
+    db.query("SELECT * FROM cities WHERE name = ?", [cityName], (err, results) => {
+        if (err) throw err;
+        if (results.length === 0) {
+            return res.send("City not found");
+        }
+        const city = results[0];
+        res.render('city', { city });
+    });
+});
+
 //activate the port to start server
 app.listen(port,()=> {
     console.log(`now listening on port http://localhost:3000`);

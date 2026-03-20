@@ -1,22 +1,30 @@
-/* for home*/
+/* for custom font! */
+@font-face {
+    font-family: 'Afacad';
+    src: url('/Afacad.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
+    font-family: 'Afacad', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, div, span {
+    font-family: 'Afacad', sans-serif;
+}
+
+/* for home*/
+/*body {
     
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
-
-nav{
-    
-    justify-content: center;
-    text-align: center;
-    gap: 24px;
-    
-}
+*/
 
 .homecontainer {
     display: flex;
     margin-top: 150px;
-    padding: 50px;
-   
+    padding: 50px; 
 }
 
 .slogandiv {
@@ -27,21 +35,6 @@ nav{
     align-items: center;
     font-size: larger;
 }
-
-.homeButtons{
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-    gap: 20px;
-}
-.triviaButton, .explorerButton {
-    width:115px;
-    height: 25px;
-    color:white;
-    background-color: blueviolet;
-    border-radius: 5px;
-}
-
 
 .imgdiv {
     flex: 1;
@@ -71,14 +64,120 @@ nav{
     padding: 20px;
     width: 20%;
     aspect-ratio: 1/1;
-    
 }
 
 .cityimg {
     width: 250px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
+
+/*for city page*/
+
+.city-header {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    background-size: cover;
+    background-position:center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.city-header-overlay {
+    width: 100%;
+    padding: 15px 30px 15px 50px;
+    background: rgba(0, 0, 0, 0.25);
+    color: white;
+    box-sizing: border-box;
+}
+
+.city-header-overlay h1 {
+    margin: 0 0 0px 0;
+    font-size: 70px;
+    text-transform: uppercase;
+}
+
+.city-header-overlay p {
+    margin: 0;
+    font-size: 20px;
+    font-weight:500;
+}
+
+.city-main {
+    display: flex;
+    margin: 30px 150px;
+    gap: 20px;
+}
+
+.city-left {
+    flex: 3;
+    font-size: 18px;
+}
+
+.city-right {
+    flex: 1;
+    background: blueviolet;
+    padding: 15px;
+    color: white;
+    border-radius: 15px;
+}
+
+.overview-short {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 10px;
+    padding-left: 40px; 
+    padding-top: 0px;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.overview-short h3 {
+    font-style: bold;
+}
+
+/* for navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f1f1f1;
+    padding: 12px 0;
+    position: sticky;
+    padding-left: 0;
+    padding-right: 15px; 
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #151515;
+    justify-content: center;
+    padding: 0 0 5px 20px;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: #202020;
+    margin: 0 20px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    background-color: blueviolet;
+    color: #fff;
+}
+
 /* .allsquares {
     display: grid;
     grid-template-columns: (20px 20px auto)

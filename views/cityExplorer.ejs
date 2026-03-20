@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<head>
-    <title>cityExplorer</title>
-    <link rel="stylesheet" href= "/style_uc.css">
+<%- include('../partials/head', { page_title: "cityExplorer" }) %>
 </head>
 <body>
-    <!--add class names for stylesheet-->
-    <nav>
-        <a href="/">Home</a>
-        <a href="/trivia">Play Trivia</a>
-        <a href="/cityExplorer">City Explorer</a>
-        <a href="/leaderboard">Leaderboard</a>
-    </nav>
     <header class="cityExpHeader">
         <h1>Hidden Gems Directory</h1>
         <p1>Learn more about the vibrant cities featured in our game!<br>Each location has a unique story, culture, and history.</p1>
@@ -26,6 +16,5 @@
         <% }) %>
         
     </div>
-
-
 </body>
+<%- include('../partials/foot') %>
