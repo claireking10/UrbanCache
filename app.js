@@ -37,8 +37,19 @@ db.connect(err => {
     }
 });
 
-//
+//FUNCTIONS
+function pickFive(qtable){
 
+}
+
+
+
+
+
+
+
+
+//ROUTES 
 //route definition --> need this for each page
 app.get('/' , (req, res) => {
     res.render('home');
@@ -65,6 +76,34 @@ app.get('/city/name/:cityName', (req, res) => {
         res.render('city', { city });
     });
 });
+
+
+
+//returns array of 5 random questions + ids from the questions table
+function takeFive(qtable){
+    let quizArray =[];
+    const minCeiled = Math.ceil(1);
+    const maxFloored = Math.floor(100);
+        for(let i=0;i<5;i++){
+            let rand = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+            quizArray.push({question: qtable[rand].question ,innerArrID: qtable[rand].question_id});
+        }
+    return quizArray;
+}
+
+
+//route for trivia, questions table
+app.get('/trivia',(req,res) =>{
+    db.query("SELECT * FROM questions", (err, fromquestions) => {
+        if (err) throw err;
+        console.log(fromquestions);
+        const tempArray = takeFive(fromquestions);
+
+        res.render('trivia', {questions: fromquestions, quizArray: tempArray});
+    });
+
+});
+
 
 //activate the port to start server
 app.listen(port,()=> {

@@ -1,3 +1,37 @@
 <%- include('../partials/head', { page_title: "Trivia" }) %>
+<body>
+    <main>
+        <% quizArray.forEach((q, index) => { %>
+            <div class="question" style="<%= index === 0 ? '' : 'display:none;' %>">
+                <%= q.question %>
+            </div>
+        <% }) %>
+        
+    </main>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = document.querySelectorAll('.question');
+            let current = 0;
+    
+            document.body.addEventListener('click', () => {
+                // hide current question
+                questions[current].style.display = 'none';
+    
+                // move to next question
+                current++;
+    
+                // if there is another question, show it
+                if (current < questions.length) {
+                    questions[current].style.display = 'block';
+                } else {
+                    // optional: end of quiz
+                    alert("Quiz finished!");
+                }
+                });
+            });
+        </script>
+    
+
+</body>
 
 <%- include('../partials/foot') %>
