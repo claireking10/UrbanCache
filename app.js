@@ -38,16 +38,6 @@ db.connect(err => {
 });
 
 //FUNCTIONS
-function pickFive(qtable){
-
-}
-
-
-
-
-
-
-
 
 //ROUTES 
 //route definition --> need this for each page
