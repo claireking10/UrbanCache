@@ -1,3 +1,50 @@
 <%- include('../partials/head', { page_title: "Leaderboard" }) %>
 
+<body>
+    <h1 class="leaderboard-title">Global Leaderboard</h1>
+    <p class="leaderboard-subtitle">The world's top cultural explorers and geography experts</p>
+    <div class="top-three-score-card-wrapper">
+        <div class="number-1-score-card">
+            <% if (scores[0]) { %>
+                <p class="number">2</p>
+                <p class="username"><%= scores[0].username %></p>
+                <p class="score"><%= scores[0].best_score %></p>
+                <p class="caption">POINTS EARNED</p>
+            <% } else { %>
+                <p>No Score Available</p>
+            <% } %>
+        </div>
+        <div>
+            <% if (scores[1]) { %>
+                <p class="number">2</p>
+                <p class="username"><%= scores[1].username %></p>
+                <p class="score"><%= scores[1].best_score %></p>
+                <p class="caption">POINTS EARNED</p>
+            <% } else { %>
+                <p>No Score Available</p>
+            <% } %>
+        </div>
+        <div>
+            <% if (scores[2]) { %>
+                <p class="number">2</p>
+                <p class="username"><%= scores[2].username %></p>
+                <p class="score"><%= scores[2].best_score %></p>
+                <p class="caption">POINTS EARNED</p>
+            <% } else { %>
+                <p>No Score Available</p>
+            <% } %>
+        </div>
+    </div>
+    <ol class="scoreboard">
+        <% scores.forEach((score)=> { %>
+            <li>
+                <div class="score-wrapper">
+                    <p class="username"><%= score.username %></p>
+                    <p class="score"><%= score.best_score %></p>
+                </div>
+            </li>
+        <% }) %>
+    </ol>
+</body>
+
 <%- include('../partials/foot') %>

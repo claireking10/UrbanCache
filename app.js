@@ -66,6 +66,18 @@ app.get('/city/name/:cityName', (req, res) => {
     });
 });
 
+// Route for viewing the leaderboard
+app.get('/leaderboard', (req, res) => {
+    db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10", (err, results) => {
+        if (err) throw err;
+        if (results.length === 0) {
+            return res.send("Scores not found");
+        }
+        const scores = results;
+        res.render('leaderboard', { scores });
+    });
+});
+
 //activate the port to start server
 app.listen(port,()=> {
     console.log(`now listening on port http://localhost:3000`);

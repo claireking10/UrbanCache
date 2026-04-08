@@ -10,7 +10,16 @@ body {
     font-family: 'Afacad', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, div, span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+div,
+span {
     font-family: 'Afacad', sans-serif;
 }
 
@@ -24,7 +33,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .homecontainer {
     display: flex;
     margin-top: 150px;
-    padding: 50px; 
+    padding: 50px;
 }
 
 .slogandiv {
@@ -44,10 +53,10 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     align-items: center;
 }
 
-.homePhoto{
+.homePhoto {
     width: 100%;
-    max-width: 400px;  
-    height: auto;      
+    max-width: 400px;
+    height: auto;
     border-radius: 8px;
 }
 
@@ -79,7 +88,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     height: 600px;
     width: 100%;
     background-size: cover;
-    background-position:center;
+    background-position: center;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -102,7 +111,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .city-header-overlay p {
     margin: 0;
     font-size: 20px;
-    font-weight:500;
+    font-weight: 500;
 }
 
 .city-main {
@@ -127,7 +136,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .overview-short {
     border-bottom: 2px solid #ccc;
     margin-bottom: 10px;
-    padding-left: 40px; 
+    padding-left: 40px;
     padding-top: 0px;
     font-size: 18px;
     font-style: italic;
@@ -146,7 +155,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     padding: 12px 0;
     position: sticky;
     padding-left: 0;
-    padding-right: 15px; 
+    padding-right: 15px;
 }
 
 .title {
@@ -183,3 +192,81 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     grid-template-columns: (20px 20px auto)
 }
  */
+
+.leaderboard-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.leaderboard-subtitle {
+    text-align: center;
+}
+
+.top-three-score-card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.top-three-score-card-wrapper .number {
+    background-color: purple;
+    color: white;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    margin: 10px auto;
+}
+
+.top-three-score-card-wrapper .username {
+    font-size: large;
+    margin: 10px;
+}
+
+.top-three-score-card-wrapper .score {
+    font-size: large;
+}
+
+.top-three-score-card-wrapper .caption {
+    font-size: medium;
+}
+
+.top-three-score-card-wrapper div {
+    border: solid 1px grey;
+    text-align: center;
+    border-radius: 5%;
+    text-transform: uppercase;
+    color: purple;
+}
+
+.top-three-score-card-wrapper .number-1-score-card {
+    border: none;
+    background-color: purple;
+    color: white;
+}
+
+.top-three-score-card-wrapper  .number-1-score-card .number {
+    background-color: white;
+    color: purple;
+}
+
+.scoreboard {
+    border: solid 1px grey;
+    border-radius: 5%;
+    text-transform: uppercase;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.scoreboard li .score-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 10px;
+}
+
+.scoreboard .score {
+    color: purple;
+}
