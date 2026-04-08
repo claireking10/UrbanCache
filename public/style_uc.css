@@ -193,6 +193,8 @@ span {
 }
  */
 
+
+ /* For Leaderboard */
 .leaderboard-title {
     text-align: center;
     text-transform: uppercase;
@@ -211,62 +213,125 @@ span {
     margin-right: 3%;
 }
 
-.top-three-score-card-wrapper .number {
-    background-color: purple;
-    color: white;
+.top-three-score-card-wrapper .image {
     border-radius: 50%;
-    height: 25px;
-    width: 25px;
+    height: 150px;
+    width: 150px;
+    margin: 20px auto;
+}
+
+.top-three-score-card-wrapper .image-placeholder {
+    background-color: grey;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: 20px auto;
+}
+
+.top-three-score-card-wrapper .number {
+    background-color: #4F39F6;
+    color: white;
+    font-size: 30px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
     margin: 10px auto;
 }
 
 .top-three-score-card-wrapper .username {
-    font-size: large;
-    margin: 10px;
+    font-size: 30px;
+    margin: 15px auto;
 }
 
 .top-three-score-card-wrapper .score {
-    font-size: large;
+    font-size: 30px;
+    margin: 10px auto 5px auto;
 }
 
 .top-three-score-card-wrapper .caption {
-    font-size: medium;
+    font-size: 18px;
+    margin: 2px auto 20px auto;
 }
 
 .top-three-score-card-wrapper div {
     border: solid 1px grey;
     text-align: center;
-    border-radius: 5%;
+    border-radius: 15px;
     text-transform: uppercase;
-    color: purple;
+    color: #4F39F6;
+    background-color: #F6F6F6;
 }
 
 .top-three-score-card-wrapper .number-1-score-card {
     border: none;
-    background-color: purple;
+    background-color: #4F39F6;
     color: white;
 }
 
 .top-three-score-card-wrapper  .number-1-score-card .number {
     background-color: white;
-    color: purple;
+    color: #4F39F6;
 }
 
 .scoreboard {
     border: solid 1px grey;
-    border-radius: 5%;
+    border-radius: 15px;
+    background-color: #F6F6F6;
     text-transform: uppercase;
     margin-left: 3%;
     margin-right: 3%;
+}
+
+.scoreboard li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.scoreboard li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+}
+
+ol.scoreboard {
+    counter-reset: item;
+    list-style: none;
 }
 
 .scoreboard li .score-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 5px 10px;
+    width: 100%;
+    font-size: 20px;
+    margin-right: 30px;
 }
 
-.scoreboard .score {
-    color: purple;
+.scoreboard li .user-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.scoreboard li .image {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+}
+
+.scoreboard li .points-wrapper {
+    text-align: right;
+}
+
+.scoreboard li .score {
+    color: #4F39F6;
+    margin-top: 0;
+}
+
+.scoreboard li .caption {
+    font-size: 18px;
+    margin-bottom: 0;
 }

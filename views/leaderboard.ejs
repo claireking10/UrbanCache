@@ -6,31 +6,37 @@
     <div class="top-three-score-card-wrapper">
         <div class="number-1-score-card">
             <% if (scores[0]) { %>
-                <p class="number">2</p>
+                <img class="image" src="avatar/<%= scores[0].avatar %>.svg">
+                <p class="number">1</p>
                 <p class="username"><%= scores[0].username %></p>
                 <p class="score"><%= scores[0].best_score %></p>
                 <p class="caption">POINTS EARNED</p>
             <% } else { %>
+                <div class="image-placeholder"></div>
                 <p>No Score Available</p>
             <% } %>
         </div>
         <div>
             <% if (scores[1]) { %>
+                <img class="image" src="avatar/<%= scores[1].avatar %>.svg">
                 <p class="number">2</p>
                 <p class="username"><%= scores[1].username %></p>
                 <p class="score"><%= scores[1].best_score %></p>
                 <p class="caption">POINTS EARNED</p>
             <% } else { %>
+                <div class="image-placeholder"></div>
                 <p>No Score Available</p>
             <% } %>
         </div>
         <div>
             <% if (scores[2]) { %>
-                <p class="number">2</p>
+                <img class="image" src="avatar/<%= scores[2].avatar %>.svg">
+                <p class="number">3</p>
                 <p class="username"><%= scores[2].username %></p>
                 <p class="score"><%= scores[2].best_score %></p>
                 <p class="caption">POINTS EARNED</p>
             <% } else { %>
+                <div class="image-placeholder"></div>
                 <p>No Score Available</p>
             <% } %>
         </div>
@@ -39,8 +45,14 @@
         <% scores.forEach((score)=> { %>
             <li>
                 <div class="score-wrapper">
-                    <p class="username"><%= score.username %></p>
-                    <p class="score"><%= score.best_score %></p>
+                    <div class="user-wrapper">
+                        <img class="image" src="avatar/<%= score.avatar %>.svg">
+                        <p class="username"><%= score.username %></p>
+                    </div>
+                    <div class="points-wrapper">
+                        <p class="caption">POINTS EARNED</p>
+                        <p class="score"><%= score.best_score %></p>
+                    </div>
                 </div>
             </li>
         <% }) %>
