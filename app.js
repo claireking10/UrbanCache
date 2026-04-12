@@ -57,6 +57,8 @@ app.get('/city/name/:cityName', async (req, res) => {
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
     if (results.length === 0) return res.send("City not found");
     res.render('city', { city: results[0] });
+});
+
 //FUNCTIONS
 
 //ROUTES 
@@ -122,16 +124,13 @@ app.post('/profile/edit', requiresAuth(), async (req, res) => {
         [username, avatar_url, auth0User.sub]
     );
     res.redirect('/profile');
+});
+
 // Route for viewing the leaderboard
-app.get('/leaderboard', (req, res) => {
-    db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10", (err, results) => {
-        if (err) throw err;
-        if (results.length === 0) {
-            return res.send("Scores not found");
-        }
-        const scores = results;
-        res.render('leaderboard', { scores });
-    });
+app.get('/leaderboard', async (req, res) => {
+    const [results] = await db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10");
+    if (results.length === 0) return res.send("Scores not found");
+    res.render('leaderboard', { scores: results });
 });
 
 
@@ -150,22 +149,12 @@ function takeFive(qtable){
 
 
 //route for trivia, questions table
-app.get('/trivia',(req,res) =>{
-    db.query("SELECT * FROM questions", (err, fromquestions) => {
-        if (err) throw err;
-        //console.log(fromquestions);
-        const tempArray = takeFive(fromquestions);
-
-        res.render('trivia', {questions: fromquestions, quizArray: tempArray});
-    });
-
+app.get('/trivia', async (req, res) => {
+    const [fromquestions] = await db.query("SELECT * FROM questions");
+    const tempArray = takeFive(fromquestions);
+    res.render('trivia', { questions: fromquestions, quizArray: tempArray });
 });
 
-
-//activate the port to start server
-app.listen(port,()=> {
-    console.log(`now listening on port http://localhost:3000`);
-});
 
 // start server
 app.listen(port, () => {
