@@ -6,6 +6,7 @@
     font-style: normal;
 }
 
+/* global styles */
 body {
     font-family: 'Afacad', sans-serif;
 }
@@ -23,13 +24,8 @@ span {
     font-family: 'Afacad', sans-serif;
 }
 
-/* for home*/
-/*body {
-    
-    font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-*/
 
+/* home page */
 .homecontainer {
     display: flex;
     margin-top: 150px;
@@ -55,34 +51,163 @@ span {
 
 .homePhoto {
     width: 100%;
-    max-width: 400px;
-    height: auto;
+    max-width: 600px;  
+    height: auto;      
     border-radius: 8px;
 }
 
-/*for city explorer */
-.citySquare {
-    flex: 1;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 20px;
-    width: 20%;
-    aspect-ratio: 1/1;
+.explorerButton, .triviaButton {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 20px 10px;
+    background-color: #4F39F6;
+    border: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    font: inherit;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
 }
 
-.cityimg {
-    width: 250px;
-    aspect-ratio: 1/1;
+.explorerButton:hover,
+.triviaButton:hover {
+    background-color: #2d1cae;
+    transform: translateY(-3px);
+}
+
+/* city explorer page */
+.pageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.allsquares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.topBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.searchBar {
+    width: 280px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #F6F6F6;
+    background: #F6F6F6;
+    font-size: 16px;
+    color: #666666;
+    font: inherit;
+    box-shadow: 0 0px 18px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 1000px) {
+    .allsquares {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .allsquares {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cityCard {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.cardImage {
+    position: relative;
+    height: 180px;
+}
+
+.cardImage img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-/*for city page*/
+.cityExpHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    gap: 20px;
+}
 
+.headerText {
+    max-width: 650px;
+}
+
+.imageOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 13px;
+    color: white;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.imageOverlay h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.location {
+    font-size: 12px;
+    opacity: 0.9;
+    padding: 0;
+    margin: 0;
+    font-style: bold;
+}
+
+.cardContent {
+    padding: 16px;
+}
+
+.description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.population strong {
+    font-size: 14px;
+}
+
+.details {
+    color: #5b5cff;
+    font-weight: 600;
+}
+
+/* for city page */
 .city-header {
     position: relative;
     height: 600px;
@@ -127,7 +252,7 @@ span {
 
 .city-right {
     flex: 1;
-    background: blueviolet;
+    background: #4F39F6;
     padding: 15px;
     color: white;
     border-radius: 15px;
@@ -142,11 +267,7 @@ span {
     font-style: italic;
 }
 
-.overview-short h3 {
-    font-style: bold;
-}
-
-/* for navbar */
+/* for navbar in head */
 .navbar {
     display: flex;
     align-items: center;
@@ -183,13 +304,269 @@ span {
 }
 
 .navbar a:hover {
-    background-color: blueviolet;
+    background-color: #4F39F6;
     color: #fff;
 }
 
-/* .allsquares {
+/* for profile page */
+.profilePage {
     display: grid;
-    grid-template-columns: (20px 20px auto)
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+    padding: 40px;
+}
+
+.profileSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profileCard {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.profileImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.rank {
+    color: #777;
+    font-size: 14px;
+}
+
+.editBtn {
+    margin-top: 16px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 10px;
+    font: inherit;
+}
+
+.profileMenu {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.profileMenu div {
+    padding: 8px 0;
+    color: #555;
+}
+
+.profileMain {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.statCard {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.statNumber {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.statLabel {
+    font-size: 20px;
+    color: #4F39F6;
+}
+
+.sectionTitle {
+    margin-top: 10px;
+    color: #555;
+}
+
+/* for profile edit popup on profile page */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalCard {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modalClose {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.modalClose:hover { 
+    background: #f0f0f0; 
+    color: #333; 
+}
+
+.editForm { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 18px; 
+}
+
+.formGroup { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.formGroup label { 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: #444; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+.formGroup input { 
+    padding: 10px 14px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 10px; 
+    font-size: 15px; 
+    font-family: inherit; 
+    outline: none; 
+}
+
+.formGroup input:focus { 
+    border-color: #4F39F6; 
+}
+
+.formGroupDisabled input { 
+    background: #f8f8f8; 
+    color: #bbb; 
+    cursor: not-allowed; 
+}
+
+.comingSoon { 
+    font-size: 10px; 
+    background: #f0efff; 
+    color: #4F39F6; 
+    padding: 2px 7px; 
+    border-radius: 6px; 
+    font-weight: 500; 
+}
+
+.modalActions { 
+    display: flex; 
+    gap: 12px; 
+    margin-top: 6px; 
+}
+
+.cancelBtn { 
+    flex: 1; 
+    padding: 11px; 
+    border: 1px solid #e0e0e0; 
+    background: white; 
+    border-radius: 10px; 
+    font-size: 15px; 
+    font-family: inherit;
+}
+
+.cancelBtn:hover { 
+    background: #f4f4f4; 
+}
+
+.saveBtn { 
+    flex: 2; 
+    padding: 11px; 
+    border: none; 
+    background: #4F39F6; 
+    color: white; 
+    border-radius: 10px; 
+    font-size: 15px; 
+    font-family: inherit; 
+}
+
+.saveBtn:hover { 
+    background: #2d1cae; 
+}
+
+.avatarGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.avatarOption {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border 0.2s;
+}
+
+.avatarOption:hover {
+    border-color: #4F39F6;
+}
+
+.avatarOption.selected {
+    border-color: #4F39F6;
+    box-shadow: 0 0 0 2px #c7c2fc;
+}
+
+.logoutItem {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #c0392b;
+    background: #fde8e8;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.logoutItem:hover {
+    background: #c0392b;
+    color: white;
 }
  */
 

@@ -1,20 +1,67 @@
 <%- include('../partials/head', { page_title: "cityExplorer" }) %>
-</head>
+
 <body>
+
+<div class="pageContainer">
     <header class="cityExpHeader">
-        <h1>Hidden Gems Directory</h1>
-        <p1>Learn more about the vibrant cities featured in our game!<br>Each location has a unique story, culture, and history.</p1>
+        <div class="headerText">
+            <h1>Hidden Gems Directory</h1>
+            <p>
+                Learn more about the vibrant cities featured in our game!<br>
+                Each location has a unique story, culture, and history.
+            </p>
+        </div>
+        <div class="topBar">
+            <input type="text" class="searchBar" id="searchInput" placeholder="Search cities...">
+        </div>
     </header>
 
-    <div class = allsquares>
+    <!-- city cards grid -->
+    <div class="allsquares">
         <% cities.forEach(city => { %>
-        <div class = citySquare> 
-            <%=city.name%> 
-            <img class = cityimg src = <%=city.imagePath %> >
-            <%=city.population%> 
-        </div>
+            <a href="/city/name/<%= encodeURIComponent(city.name) %>" class="cityCard" data-name="<%= city.name.toLowerCase() %>">
+                <div class="cardImage">
+                    <img src="<%= city.imagePath %>" alt="<%= city.name %>">
+                    <div class="imageOverlay">
+                        <p class="location"><%= city.country || "Unknown" %></p>
+                        <h2><%= city.name %></h2>
+                    </div>
+                </div>
+                <div class="cardContent">
+                    <p class="description">
+                        <%= city.description || "Discover this amazing city full of culture and history." %>
+                    </p>
+                    <div class="cardFooter">
+                        <span class="population">
+                            Population<br>
+                            <strong><%= city.population %></strong>
+                        </span>
+                        <span class="details">DETAILS →</span>
+                    </div>
+                </div>
+            </a>
         <% }) %>
-        
     </div>
-</body>
+</div>
+
 <%- include('../partials/foot') %>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".cityCard");
+
+searchInput.addEventListener("input", function () {
+    const value = this.value.toLowerCase();
+
+    cards.forEach(card => {
+        const name = card.getAttribute("data-name");
+
+        if (name.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+</script>
+</body>

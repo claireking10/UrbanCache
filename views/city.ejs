@@ -1,6 +1,6 @@
 <%- include('../partials/head', { page_title: city.name }) %>
 </head>
-<div class="city-header" style="background-image: url(<%= city.imagePath %>)">
+<div class="city-header" style="background-image: url('<%= city.imagePath %>')">
     <div class="city-header-overlay">
         <h1><b><%= city.name %></b></h1>
         <p><%= city.country %> | <%= city.population %> Residents </p>
