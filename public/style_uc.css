@@ -391,12 +391,12 @@ ol.scoreboard {
 
  }
 
- .score{
+.questionAndScoreDiv .score {
     position: absolute;
-    top:5px;
-    right:10px;
-    font-weight:bold;
- }
+    top: 5px;
+    right: 10px;
+    font-weight: bold;
+}
 
 
  /*map styling stuff */
