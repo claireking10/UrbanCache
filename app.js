@@ -76,7 +76,7 @@ function takeFive(qtable){
     const maxFloored = Math.floor(100);
         for(let i=0;i<5;i++){
             let rand = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
-            quizArray.push({question: qtable[rand].question ,innerArrID: qtable[rand].question_id});
+            quizArray.push({question: qtable[rand].question ,innerArrID: qtable[rand].question_id,cityAnswerID: qtable[rand].city_id});
         }
     return quizArray;
 }
@@ -86,7 +86,7 @@ function takeFive(qtable){
 app.get('/trivia',(req,res) =>{
     db.query("SELECT * FROM questions", (err, fromquestions) => {
         if (err) throw err;
-        console.log(fromquestions);
+        //console.log(fromquestions);
         const tempArray = takeFive(fromquestions);
 
         res.render('trivia', {questions: fromquestions, quizArray: tempArray});
