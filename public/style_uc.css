@@ -335,3 +335,31 @@ ol.scoreboard {
     font-size: 18px;
     margin-bottom: 0;
 }
+
+/* For Footer */
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 12px 0;
+    padding-left: 0;
+    padding-right: 15px;
+}
+
+.footer a {
+    color: #202020;
+    margin: 5px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    background-color: blueviolet;
+    color: #fff;
+}
