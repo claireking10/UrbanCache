@@ -10,7 +10,16 @@ body {
     font-family: 'Afacad', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, div, span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+div,
+span {
     font-family: 'Afacad', sans-serif;
 }
 
@@ -24,7 +33,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .homecontainer {
     display: flex;
     margin-top: 150px;
-    padding: 50px; 
+    padding: 50px;
 }
 
 .slogandiv {
@@ -44,10 +53,10 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     align-items: center;
 }
 
-.homePhoto{
+.homePhoto {
     width: 100%;
-    max-width: 400px;  
-    height: auto;      
+    max-width: 400px;
+    height: auto;
     border-radius: 8px;
 }
 
@@ -79,7 +88,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     height: 600px;
     width: 100%;
     background-size: cover;
-    background-position:center;
+    background-position: center;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -102,7 +111,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .city-header-overlay p {
     margin: 0;
     font-size: 20px;
-    font-weight:500;
+    font-weight: 500;
 }
 
 .city-main {
@@ -127,7 +136,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 .overview-short {
     border-bottom: 2px solid #ccc;
     margin-bottom: 10px;
-    padding-left: 40px; 
+    padding-left: 40px;
     padding-top: 0px;
     font-size: 18px;
     font-style: italic;
@@ -146,7 +155,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     padding: 12px 0;
     position: sticky;
     padding-left: 0;
-    padding-right: 15px; 
+    padding-right: 15px;
 }
 
 .title {
@@ -184,6 +193,176 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
 }
  */
 
+
+ /* For Leaderboard */
+.leaderboard-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.leaderboard-subtitle {
+    text-align: center;
+}
+
+.top-three-score-card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.top-three-score-card-wrapper .image {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: 20px auto;
+}
+
+.top-three-score-card-wrapper .image-placeholder {
+    background-color: grey;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: 20px auto;
+}
+
+.top-three-score-card-wrapper .number {
+    background-color: #4F39F6;
+    color: white;
+    font-size: 30px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin: 10px auto;
+}
+
+.top-three-score-card-wrapper .username {
+    font-size: 30px;
+    margin: 15px auto;
+}
+
+.top-three-score-card-wrapper .score {
+    font-size: 30px;
+    margin: 10px auto 5px auto;
+}
+
+.top-three-score-card-wrapper .caption {
+    font-size: 18px;
+    margin: 2px auto 20px auto;
+}
+
+.top-three-score-card-wrapper div {
+    border: solid 1px grey;
+    text-align: center;
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #4F39F6;
+    background-color: #F6F6F6;
+}
+
+.top-three-score-card-wrapper .number-1-score-card {
+    border: none;
+    background-color: #4F39F6;
+    color: white;
+}
+
+.top-three-score-card-wrapper  .number-1-score-card .number {
+    background-color: white;
+    color: #4F39F6;
+}
+
+.scoreboard {
+    border: solid 1px grey;
+    border-radius: 15px;
+    background-color: #F6F6F6;
+    text-transform: uppercase;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.scoreboard li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.scoreboard li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+}
+
+ol.scoreboard {
+    counter-reset: item;
+    list-style: none;
+}
+
+.scoreboard li .score-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.scoreboard li .user-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.scoreboard li .image {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+}
+
+.scoreboard li .points-wrapper {
+    text-align: right;
+}
+
+.scoreboard li .score {
+    color: #4F39F6;
+    margin-top: 0;
+}
+
+.scoreboard li .caption {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+/* For Footer */
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 12px 0;
+    padding-left: 0;
+    padding-right: 15px;
+}
+
+.footer a {
+    color: #202020;
+    margin: 5px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    background-color: blueviolet;
+    color: #fff;
+}
  /*TRIVIA PAGE CSS*/
  .questionAndScoreDiv{
     position: relative;
