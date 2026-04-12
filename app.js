@@ -57,6 +57,12 @@ app.get('/city/name/:cityName', async (req, res) => {
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
     if (results.length === 0) return res.send("City not found");
     res.render('city', { city: results[0] });
+//FUNCTIONS
+
+//ROUTES 
+//route definition --> need this for each page
+app.get('/' , (req, res) => {
+    res.render('home');
 });
 
 // profile
@@ -116,6 +122,49 @@ app.post('/profile/edit', requiresAuth(), async (req, res) => {
         [username, avatar_url, auth0User.sub]
     );
     res.redirect('/profile');
+// Route for viewing the leaderboard
+app.get('/leaderboard', (req, res) => {
+    db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10", (err, results) => {
+        if (err) throw err;
+        if (results.length === 0) {
+            return res.send("Scores not found");
+        }
+        const scores = results;
+        res.render('leaderboard', { scores });
+    });
+});
+
+
+
+//returns array of 5 random questions + ids from the questions table
+function takeFive(qtable){
+    let quizArray =[];
+    const minCeiled = Math.ceil(1);
+    const maxFloored = Math.floor(100);
+        for(let i=0;i<5;i++){
+            let rand = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+            quizArray.push({question: qtable[rand].question ,innerArrID: qtable[rand].question_id,cityAnswerID: qtable[rand].city_id});
+        }
+    return quizArray;
+}
+
+
+//route for trivia, questions table
+app.get('/trivia',(req,res) =>{
+    db.query("SELECT * FROM questions", (err, fromquestions) => {
+        if (err) throw err;
+        //console.log(fromquestions);
+        const tempArray = takeFive(fromquestions);
+
+        res.render('trivia', {questions: fromquestions, quizArray: tempArray});
+    });
+
+});
+
+
+//activate the port to start server
+app.listen(port,()=> {
+    console.log(`now listening on port http://localhost:3000`);
 });
 
 // start server
