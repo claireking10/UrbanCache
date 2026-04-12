@@ -1,6 +1,7 @@
 <%- include('../partials/head', { page_title: "Trivia" }) %>
 <body>
     <main>
+    
     <div class="questionAndScoreDiv">
         <div class = "score"> 
             Score: 0
@@ -10,9 +11,12 @@
     <!-- for each loop that take the quizArray and only shows the first question -->
     <% quizArray.forEach((q, index) => { %>
         <div class="question" style="<%= index === 0 ? '' : 'display:none;' %>">
-            <%= q.question %>
-            <%= q.innerArrID %>
-            <%= q.cityAnswerID %>
+            
+            <div class = "individualQuestion"> 
+                <%= q.question %>
+                <%= q.innerArrID %>
+                <%= q.cityAnswerID %>
+            </div>
         </div>
     <% }) %>
     </div>
@@ -22,6 +26,54 @@
     <div class="mapDiv">
         <img class="map" src="/urbanMapFinal.png" alt="Description of image">
     </div>
+    <!-- div for instruction popup -->
+    <div id="instrOverlay" class="popups">
+        <div class="popupContent">
+            <div id = "closeBtn" class = "closerButton">
+                &times;
+            </div>
+            <h2>Instructions</h2>
+            <p>Identify the city that each clue refers to. Double-click on the map where you think the correct city is! <br>
+                The closer you are to the city's location, the more points you get. <br>
+                There will be 5 questions. Good luck!
+            </p>
+        </div>
+    </div>
+
+    <div id = correctOverlay class = "popups">
+        <div class = popupContent>
+            <div id = "closeBtn2" class = "closerButton">
+                &times;
+            </div>
+            <h2>YAY! +<span id="pointsValue"></span> points! </h2>
+        </div>
+    </div>
+
+    <div id = incorrectOverlay class = "popups">
+        <div class = popupContent>
+            <div id = "closeBtn3" class = "closerButton">
+                &times;
+            </div>
+            <h2>Nay. Keep going!</h2>
+        </div>
+    </div>
+
+    <div id = finalScoreOverlay class = "popups">
+        <div class = popupContent>
+            <h2>Congrats your final score is: <span id="finalScore"></span></h2>
+                <a href="/" class="sendBackHomeDiv">
+                    <button class = "homebutton" >Home</button>
+                </a>
+                
+             
+               
+
+            
+        </div>
+    </div>
+
+
+
 
     </main>
     <script>
@@ -66,6 +118,8 @@
         function showScoreAlert(s){
             alert("Congrats, you are not completely ignorant!!!! You have earned "+s+" points!");
         }
+
+        
         //update score variable
        /*  function updateScoreVar(newScoreAddition, score){
             score += newScoreAddition;
@@ -83,6 +137,32 @@
 
         console.log("script loaded");
         document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('instrOverlay');
+            //const openBtn = document.getElementById('openBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const pointsValue = document.getElementById('pointsValue');
+            
+
+            overlay.style.display = 'block';
+            closeBtn.addEventListener('click', () => {
+                overlay.style.display = 'none';
+            });
+
+            const correctPopup = document.getElementById('correctOverlay');
+            const closeBtn2 = document.getElementById('closeBtn2');
+
+            const incorrectPopup = document.getElementById('incorrectOverlay');
+            const closeBtn3 = document.getElementById('closeBtn3');
+
+            const endQuizPopup = document.getElementById("finalScoreOverlay");
+             
+
+
+            
+
+
+
+
             const scoreDisplay = document.querySelector('.score');
             const questions = document.querySelectorAll('.question');
             let current = 0;
@@ -126,28 +206,30 @@
                const cityX = cityNormalArr[cityID - 1].x_coor;
                const cityY = cityNormalArr[cityID - 1].y_coor;
 
-
-               //testing!!! finding normal coor for cities (served it's purpose but no longer needed, never forgotten rip forEach loop)
-               /* const w = mapDOMObject.width;
-               const h = mapDOMObject.height;
-               console.log(w);
-               console.log(h);
-               console.log("coordinates")
-               cityCoorArr.forEach((city) => {
-                const normXc = normalizeX(city.x_coor, mapDOMObject);
-                const normYc = normalizeY(city.y_coor, mapDOMObject);
-                console.log(city.cityName + ":" + normXc + " , " + normYc);
-               }); */
-
                
                const distance = getDistance(normXClick, normYClick, cityX, cityY);
                const pointsearned = getPointsEarned(distance);
+               pointsValue.textContent = pointsearned;
                
 
                console.log(distance);
                console.log(pointsearned);
 
-               showScoreAlert(pointsearned);
+               //showScoreAlert(pointsearned); RIP </3
+               if (pointsearned > 0) {
+                correctPopup.style.display = 'block';
+                
+                closeBtn2.addEventListener('click', () => {
+                    correctPopup.style.display = 'none';
+                });
+               }
+               else {
+                incorrectPopup.style.display = 'block';
+                closeBtn3.addEventListener('click',()=> {
+                    incorrectPopup.style.display='none';
+                });
+               }
+
                score = score + pointsearned;
                //updateScreenScore(score, scoreDisplay);
                scoreDisplay.textContent = "Score:" + score;
@@ -162,10 +244,12 @@
                     questions[current].style.display = 'block';
                 } else {
                 // optional: end of quiz
-                    alert("Quiz finished!");
+                endQuizPopup.style.display = 'block';
+
+                    /* alert("Quiz finished!");
                     setTimeout(() => {
                         window.location.href="http://localhost:3000";
-                    }, 1000);
+                    }, 1000); */
                     
                 }
 
@@ -173,6 +257,19 @@
 
 
         });
+
+
+           //testing!!! finding normal coor for cities (served it's purpose but no longer needed, never forgotten rip forEach loop)
+               /* const w = mapDOMObject.width;
+               const h = mapDOMObject.height;
+               console.log(w);
+               console.log(h);
+               console.log("coordinates")
+               cityCoorArr.forEach((city) => {
+                const normXc = normalizeX(city.x_coor, mapDOMObject);
+                const normYc = normalizeY(city.y_coor, mapDOMObject);
+                console.log(city.cityName + ":" + normXc + " , " + normYc);
+               }); */
 
 
     </script>

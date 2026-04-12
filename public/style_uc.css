@@ -191,6 +191,7 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     height: 10vh;       /*full screen*/
 
  }
+ 
  .question{
 /* commenting these out because we don't want question div to be the entire page anymore */
   /* width: 100vw;
@@ -198,7 +199,17 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
   display:flex;
   justify-content:center;
   align-items: center;
-  height: 100%
+  height: 100%;
+
+  
+
+ }
+
+ .individualQuestion {
+    background-color: rgb(189, 215, 241);
+    border-radius: 5px;
+    padding: 15px;
+
  }
 
  .score{
@@ -214,4 +225,38 @@ h1, h2, h3, h4, h5, h6, p, a, div, span {
     max-width: 100vw;
     max-height: 100vh;
     object-fit: contain;
+}
+
+/* POPUP ALERT BOX STYLING HERE */
+.popups {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000;
+  }
+
+.popupContent {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 8px;
+    position: relative;
+}
+
+.closerButton {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#instruction_popup{
+
 }
