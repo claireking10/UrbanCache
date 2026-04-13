@@ -1,7 +1,5 @@
 <%- include('../partials/head', { page_title: "Trivia" }) %>
-<body>
-    <main>
-    
+  
     <div class="questionAndScoreDiv">
         <div class = "score"> 
             Score: 0
@@ -58,27 +56,28 @@
         </div>
     </div>
 
-    <div id = finalScoreOverlay class = "popups">
-        <div class = popupContent>
-            <h2>Congrats your final score is: <span id="finalScore"></span></h2>
-                <a href="/" class="sendBackHomeDiv">
-                    <button class = "homebutton" >Home</button>
-                </a>
-                
-             
-               
-
-            
+    <div id="finalScoreOverlay" class="popups">
+        <div class="popupContent">
+            <h2>Congrats! You're getting there... Your final score is: <span id="finalScore"></span></h2>
+            <a href="/trivia">
+                <button class="playAgainButton">Play Again</button>
+            </a>
         </div>
     </div>
 
-
-
-
-    </main>
     <script>
         //SCORE FUNCTIONS 
         let score = 0;
+
+        //sends final score to database
+        function submitScore(finalScore) {
+            fetch('/trivia/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'score=' + finalScore
+            });
+        }
+
         //giving us access to quizArray inside the script
         const quizArray = <%- JSON.stringify(quizArray) %>;
 
@@ -110,16 +109,13 @@
             else {
                 return 0;
             }
-               }
+        }
         
-        
-
         // func showScore on screen (ex. +700 points) takes in points earned and simply displays it (like an alert)
         function showScoreAlert(s){
             alert("Congrats, you are not completely ignorant!!!! You have earned "+s+" points!");
         }
 
-        
         //update score variable
        /*  function updateScoreVar(newScoreAddition, score){
             score += newScoreAddition;
@@ -130,10 +126,6 @@
         } */
         //func nextquestion
         //func sendFinalScore that sends final score to database (score field in users table?)
-
-
-
-
 
         console.log("script loaded");
         document.addEventListener('DOMContentLoaded', () => {
@@ -153,16 +145,7 @@
 
             const incorrectPopup = document.getElementById('incorrectOverlay');
             const closeBtn3 = document.getElementById('closeBtn3');
-
             const endQuizPopup = document.getElementById("finalScoreOverlay");
-             
-
-
-            
-
-
-
-
             const scoreDisplay = document.querySelector('.score');
             const questions = document.querySelectorAll('.question');
             let current = 0;
@@ -244,8 +227,9 @@
                     questions[current].style.display = 'block';
                 } else {
                 // optional: end of quiz
+                document.getElementById('finalScore').textContent = score;
                 endQuizPopup.style.display = 'block';
-
+                submitScore(score);
                     /* alert("Quiz finished!");
                     setTimeout(() => {
                         window.location.href="http://localhost:3000";
@@ -273,6 +257,5 @@
 
 
     </script>
-</body>
 
 <%- include('../partials/foot') %>

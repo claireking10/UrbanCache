@@ -92,9 +92,9 @@ app.get('/profile', requiresAuth(), async (req, res) => {
     );
 
     const [[rankRow]] = await db.query(`
-        SELECT COUNT(*) + 1 AS userRank FROM (
-            SELECT user_id, MAX(score) as top FROM scores GROUP BY user_id
-        ) t WHERE t.top > (SELECT COALESCE(MAX(score), 0) FROM scores WHERE user_id = ?)
+        SELECT COUNT(*) + 1 AS userRank 
+        FROM users 
+        WHERE best_score > (SELECT best_score FROM users WHERE id = ?)
     `, [userId]);
     
     const [[stats]] = await db.query(`
@@ -119,9 +119,11 @@ app.get('/profile', requiresAuth(), async (req, res) => {
 app.post('/profile/edit', requiresAuth(), async (req, res) => {
     const auth0User = req.oidc.user;
     const { username, avatar_url } = req.body;
+    const avatarNum = avatar_url ? parseInt(avatar_url.replace(/\D/g, '')) : 1;
+
     await db.query(
-        'UPDATE users SET username = ?, avatar_url = ? WHERE auth0_id = ?',
-        [username, avatar_url, auth0User.sub]
+        'UPDATE users SET username = ?, avatar_url = ?, avatar = ? WHERE auth0_id = ?',
+        [username, avatar_url, avatarNum, auth0User.sub]
     );
     res.redirect('/profile');
 });
@@ -155,6 +157,20 @@ app.get('/trivia', async (req, res) => {
     res.render('trivia', { questions: fromquestions, quizArray: tempArray });
 });
 
+// save scores after trivia
+app.post('/trivia/submit', async (req, res) => {
+    const { score } = req.body;
+    if (!req.oidc.isAuthenticated()) return res.redirect('/trivia');
+    const auth0User = req.oidc.user;
+    const [[user]] = await db.query('SELECT * FROM users WHERE auth0_id = ?', [auth0User.sub]);
+    if (user) {
+        await db.query('INSERT INTO scores (user_id, score) VALUES (?, ?)', [user.id, score]);
+        if (score > user.best_score) {
+            await db.query('UPDATE users SET best_score = ? WHERE id = ?', [score, user.id]);
+        }
+    }
+    res.redirect('/profile');
+});
 
 // start server
 app.listen(port, () => {

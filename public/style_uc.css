@@ -24,6 +24,25 @@ span {
     font-family: 'Afacad', sans-serif;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
 
 /* home page */
 .homecontainer {
@@ -56,7 +75,7 @@ span {
     border-radius: 8px;
 }
 
-.explorerButton, .triviaButton {
+.explorerButton, .triviaButton, .playAgainButton {
     display: inline-block;
     padding: 5px 10px;
     margin: 20px 10px;
@@ -72,7 +91,7 @@ span {
 }
 
 .explorerButton:hover,
-.triviaButton:hover {
+.triviaButton:hover, .playAgainButton:hover {
     background-color: #2d1cae;
     transform: translateY(-3px);
 }
@@ -568,8 +587,6 @@ span {
     background: #c0392b;
     color: white;
 }
- */
-
 
  /* For Leaderboard */
 .leaderboard-title {
@@ -595,6 +612,7 @@ span {
     height: 150px;
     width: 150px;
     margin: 20px auto;
+    object-fit: cover;
 }
 
 .top-three-score-card-wrapper .image-placeholder {
@@ -603,6 +621,7 @@ span {
     height: 150px;
     width: 150px;
     margin: 20px auto;
+    object-fit: cover;
 }
 
 .top-three-score-card-wrapper .number {
@@ -697,6 +716,7 @@ ol.scoreboard {
     height: 50px;
     width: 50px;
     margin: 5px;
+    object-fit: cover
 }
 
 .scoreboard li .points-wrapper {
@@ -737,7 +757,7 @@ ol.scoreboard {
 }
 
 .footer a:hover {
-    background-color: blueviolet;
+    background-color: #4F39F6;
     color: #fff;
 }
  /*TRIVIA PAGE CSS*/
