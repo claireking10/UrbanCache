@@ -14,7 +14,12 @@
                 <a href="/trivia">Play Trivia</a>
                 <a href="/cityExplorer">City Explorer</a>
                 <a href="/leaderboard">Leaderboard</a>
-                <a href="/profile">Profile</a>
+                <% if (typeof isAuthenticated !== 'undefined' && isAuthenticated) { %>
+                    <a href="/profile">Profile</a>
+                    <a href="/logout">Log Out</a>
+                <% } else { %>
+                    <a href="/login">Log In</a>
+                <% } %>
             </div>
         </nav>
     </header>
