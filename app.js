@@ -35,7 +35,6 @@ app.use((req, res, next) => {
     const isAuth = req.oidc?.isAuthenticated?.() || false;
     res.locals.isAuthenticated = isAuth;
     res.locals.user = req.oidc?.user || null;
-    console.log("AUTH STATE:", isAuth);
     next();
 });
 
