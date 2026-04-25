@@ -1,0 +1,118 @@
+<%- include('../partials/head', { page_title: "Profile" }) %>
+</head>
+
+<div class="profilePage">
+
+    <!-- sidebar with profile info, log out, edit profile option -->
+    <div class="profileSidebar">
+
+        <div class="profileCard">
+            <img src="<%= user.avatar_url || '/avatar1.jpg' %>" class="profileImg">
+            <h2><%= user.username %></h2>
+            <p class="rank">Explorer Rank <%= user.userRank || 1 %></p>
+            <button class="editBtn" onclick="openEditModal()">Edit Profile</button>
+        </div>
+
+        <div class="profileMenu">
+            <div>Preferences</div>
+            <div><a href="/logout" class="menuItem logoutItem">Log Out</a></div>
+        </div>
+
+    </div>
+
+    <!-- main content (stats and achievements) -->
+    <div class="profileMain">
+        <div class="statsGrid">
+
+            <div class="statCard">
+                <p class="statNumber"><%= user.gamesPlayed || 0 %></p>
+                <p class="statLabel">Games Played</p>
+            </div>
+
+            <div class="statCard">
+                <p class="statNumber"><%= user.personalBest || 0 %></p>
+                <p class="statLabel">Personal Best</p>
+            </div>
+
+            <div class="statCard">
+                <p class="statNumber"><%= user.citiesDiscovered || 0 %></p>
+                <p class="statLabel">Cities Discovered</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal (popup) for editing profile -->
+    <div id="editModal" class="modalOverlay" style="display:none;">
+        <div class="modalCard">
+            
+            <div class="modalHeader">
+                <h2 style="margin:0;">Edit Profile</h2>
+                <button class="modalClose" onclick="closeEditModal()">✕</button>
+            </div>
+
+            <form action="/profile/edit" method="POST" class="editForm">
+                <div class="formGroup">
+                    <label>Choose Avatar</label>
+                    <div class="avatarGrid">
+                        <% const avatars = [
+                            '/avatar1.jpg',
+                            '/avatar2.jpg',
+                            '/avatar3.jpg',
+                            '/avatar4.jpg',
+                            '/avatar5.jpg',
+                        ]; %>
+                        <% avatars.forEach(function(a) { %>
+                            <img 
+                                src="<%= a %>" 
+                                class="avatarOption <%= user.avatar_url === a ? 'selected' : '' %>"
+                                onclick="selectAvatar('<%= a %>')"
+                            >
+                        <% }); %>
+                    </div>
+                    <input type="hidden" name="avatar_url" id="avatarInput" value="<%= user.avatar_url || avatars[0] %>">
+                </div>
+
+                <div class="formGroup">
+                    <label>Username</label>
+                    <input type="text" name="username" value="<%= user.username %>" placeholder="Your username">
+                </div>
+
+                <div class="formGroup formGroupDisabled">
+                    <label>Password <span class="comingSoon">coming soon</span></label>
+                    <input type="password" placeholder="••••••••" disabled>
+                </div>
+
+                <div class="modalActions">
+                    <button type="button" class="cancelBtn" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="saveBtn">Save Changes</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- script to handle the modal (popup) and avatar selection -->
+<script>    
+function openEditModal() {
+    document.getElementById('editModal').style.display = 'flex';
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+document.getElementById('editModal').addEventListener('click', function(e) {
+    if (e.target === this) closeEditModal();
+});
+
+function selectAvatar(src) {
+    document.getElementById('avatarInput').value = src;
+    document.querySelectorAll('.avatarOption').forEach(img => {
+        img.classList.toggle('selected', img.src.endsWith(src));
+    });
+}
+</script>
+
+<%- include('../partials/foot') %>

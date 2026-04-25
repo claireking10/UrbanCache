@@ -1,0 +1,28 @@
+<%- include('../partials/head', { page_title: city.name }) %>
+</head>
+<div class="city-header" style="background-image: url('<%= city.imagePath %>')">
+    <div class="city-header-overlay">
+        <h1><b><%= city.name %></b></h1>
+        <p><%= city.country %> | <%= city.population %> Residents </p>
+    </div>
+</div>
+
+<div class="city-main">
+    <div class="city-left">
+        <div class="overview-short-title">
+            <h3>Overview</h3>
+        </div>
+        <div class="overview-short">
+            <p><%= city.blurb %></p>
+        </div>
+        <div class="overview-long">
+            <p><%= city.description %></p>
+        </div>
+    </div>
+    <div class="city-right">
+        <h3>Visit <%= city.name %></h3>
+        <p>Ready to see these sights in person? <br> Exploring <%= city.name %> supports local economies and promotes global cultural exchange.</p>
+        <!-- add city map image with pin here once images collected! will need to redo sql dump to have a field for the image-->
+    </div>
+</div>
+<%- include('../partials/foot') %>
