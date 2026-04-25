@@ -119,11 +119,10 @@ app.get('/profile', requiresAuth(), async (req, res) => {
 app.post('/profile/edit', requiresAuth(), async (req, res) => {
     const auth0User = req.oidc.user;
     const { username, avatar_url } = req.body;
-    const avatarNum = avatar_url ? parseInt(avatar_url.replace(/\D/g, '')) : 1;
 
     await db.query(
-        'UPDATE users SET username = ?, avatar_url = ?, avatar = ? WHERE auth0_id = ?',
-        [username, avatar_url, avatarNum, auth0User.sub]
+        'UPDATE users SET username = ?, avatar_url = ? WHERE auth0_id = ?',
+        [username, avatar_url, auth0User.sub]
     );
     res.redirect('/profile');
 });
