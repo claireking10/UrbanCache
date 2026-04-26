@@ -42,16 +42,20 @@ const db = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-// routes
+// ROUTES
+
+//Home
 app.get('/', (req, res) => {
     res.render('home');
 });
 
+//All cities
 app.get('/cityExplorer', async (req, res) => {
     const [results] = await db.query("SELECT * FROM cities");
     res.render('cityExplorer', { cities: results });
 });
 
+//Specific city
 app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
@@ -59,15 +63,7 @@ app.get('/city/name/:cityName', async (req, res) => {
     res.render('city', { city: results[0] });
 });
 
-//FUNCTIONS
-
-//ROUTES 
-//route definition --> need this for each page
-app.get('/' , (req, res) => {
-    res.render('home');
-});
-
-// profile
+// Profile
 app.get('/profile', requiresAuth(), async (req, res) => {
     const auth0User = req.oidc.user;
 
@@ -128,7 +124,7 @@ app.post('/profile/edit', requiresAuth(), async (req, res) => {
     res.redirect('/profile');
 });
 
-// Route for viewing the leaderboard
+// Leaderboard
 app.get('/leaderboard', async (req, res) => {
     const [results] = await db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10");
     if (results.length === 0) return res.send("Scores not found");
@@ -137,7 +133,7 @@ app.get('/leaderboard', async (req, res) => {
 
 
 
-//returns array of 5 random questions + ids from the questions table
+//Takes an array of questions, returns five random ones
 function takeFive(qtable){
     let quizArray =[];
     const minCeiled = Math.ceil(1);
@@ -157,7 +153,7 @@ app.get('/trivia', async (req, res) => {
     res.render('trivia', { questions: fromquestions, quizArray: tempArray });
 });
 
-// save scores after trivia
+// Replaces best_score if necessary
 app.post('/trivia/submit', async (req, res) => {
     const { score } = req.body;
     if (!req.oidc.isAuthenticated()) return res.redirect('/trivia');

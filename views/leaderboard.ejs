@@ -1,7 +1,10 @@
 <%- include('../partials/head', { page_title: "Leaderboard" }) %>
 
+    <!-- Title Section -->
     <h1 class="leaderboard-title">Global Leaderboard</h1>
     <p class="leaderboard-subtitle">The world's top cultural explorers and geography experts</p>
+
+    <!-- Top Three, with Number One Highlighted -->
     <div class="top-three-score-card-wrapper">
         <div class="number-1-score-card">
             <% if (scores[0]) { %>
@@ -40,6 +43,8 @@
             <% } %>
         </div>
     </div>
+
+    <!-- Full Scoreboard, 1-10 -->
     <ol class="scoreboard">
         <% scores.forEach((score)=> { %>
             <li>

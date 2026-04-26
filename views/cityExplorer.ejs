@@ -1,6 +1,7 @@
 <%- include('../partials/head', { page_title: "cityExplorer" }) %>
 
 <div class="pageContainer">
+    <!-- Title and Navigation Bar -->
     <header class="cityExpHeader">
         <div class="headerText">
             <h1>Hidden Gems Directory</h1>
@@ -48,6 +49,7 @@
 const searchInput = document.getElementById("searchInput");
 const cards = document.querySelectorAll(".cityCard");
 
+// Returns search
 searchInput.addEventListener("input", function () {
     const value = this.value.toLowerCase();
 
