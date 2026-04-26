@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const session = require('express-session');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 // middleware
@@ -173,5 +173,5 @@ app.post('/trivia/submit', async (req, res) => {
 
 // start server
 app.listen(port, () => {
-    console.log(`now listening on port http://localhost:3000`);
+    console.log(`now listening on port ${port}`);
 });
