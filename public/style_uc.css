@@ -62,16 +62,17 @@ main {
 
 .imgdiv {
     flex: 1;
-    flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .homePhoto {
     width: 100%;
-    max-width: 600px;  
-    height: auto;      
+    max-width: 600px;
+    aspect-ratio: 4/3;
+    object-fit:cover;    
     border-radius: 8px;
 }
 

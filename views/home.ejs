@@ -18,8 +18,20 @@
             
         </div>
         <div class="imgdiv">
-            <!--just a static img for now, but featured city for loop thingy if we have time?-->
-            <img class="homePhoto"src = "/medellinPhoto.jpg">
+            <img class="homePhoto" id="homePhoto" src="<%= images[0] %>">
         </div>
     </div>
 <%- include('../partials/foot') %>
+
+<!-- script to make the home page image slideshow -->
+<script>
+    const images = JSON.parse('<%- JSON.stringify(images) %>');
+    let index = 0;
+
+    const imgElement = document.getElementById("homePhoto");
+
+    setInterval(() => {
+        index = (index + 1) % images.length;
+        imgElement.src = images[index];
+    }, 9000); // edit this to change speed of slideshow, is set to 9 seconds right now
+</script>

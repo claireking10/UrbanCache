@@ -130,7 +130,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'admin','pass1234',175,1,NULL,NULL,'/avatar1.jpg'),(2,0,'user1','pass5678',250,2,NULL,NULL,'/avatar2.jpg'),(3,0,'user2','pass2357',120,3,NULL,NULL,'/avatar3.jpg'),(4,0,'claireking15',NULL,900,1,'auth0|69db19071ab9fbe897696713','claireking150@gmail.com','/avatar1.jpg');
+INSERT INTO `users` VALUES (1,1,'admin','pass1234',175,NULL,NULL,'/avatar1.jpg'),(2,0,'user1','pass5678',250,NULL,NULL,'/avatar2.jpg'),(3,0,'user2','pass2357',120,NULL,NULL,'/avatar3.jpg'),(4,0,'claireking15',NULL,900,'auth0|69db19071ab9fbe897696713','claireking150@gmail.com','/avatar1.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

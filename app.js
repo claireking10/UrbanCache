@@ -5,10 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const session = require('express-session');
-
 const app = express();
-const port = 3000;
-
+const port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 // middleware
@@ -33,13 +31,22 @@ app.use(auth({
     issuerBaseURL: process.env.ISSUER_BASE_URL
 }));
 
+app.use((req, res, next) => {
+    const isAuth = req.oidc?.isAuthenticated?.() || false;
+    res.locals.isAuthenticated = isAuth;
+    res.locals.user = req.oidc?.user || null;
+    next();
+});
 
 // database
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    ssl: {
+        rejectUnauthorized: true
+    }
 });
 
 // ROUTES
@@ -50,12 +57,27 @@ app.get('/', (req, res) => {
 });
 
 //All cities
+// routes
+
+// home page
+app.get('/', async (req, res) => {
+    try {
+        const [cities] = await db.query("SELECT imagePath FROM cities");
+        const images = cities.map(city => city.imagePath);
+        res.render('home', { images });
+    } catch (err) {
+        console.error(err);
+        res.render('home', { images: [] });
+    }
+});
+
+// city explorer page
 app.get('/cityExplorer', async (req, res) => {
     const [results] = await db.query("SELECT * FROM cities");
     res.render('cityExplorer', { cities: results });
 });
 
-//Specific city
+// individual city page
 app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
@@ -63,14 +85,13 @@ app.get('/city/name/:cityName', async (req, res) => {
     res.render('city', { city: results[0] });
 });
 
-// Profile
-app.get('/profile', requiresAuth(), async (req, res) => {
-    const auth0User = req.oidc.user;
 
+// profile
+app.get('/profile', requiresAuth(), async (req, res) => {
+    const auth0User = req.oidc?.user;
     let [[user]] = await db.query(
         'SELECT * FROM users WHERE auth0_id = ?', [auth0User.sub]
     );
-
     if (!user) {
         await db.query(
             'INSERT INTO users (auth0_id, username, email) VALUES (?, ?, ?)',
@@ -80,19 +101,15 @@ app.get('/profile', requiresAuth(), async (req, res) => {
             'SELECT * FROM users WHERE auth0_id = ?', [auth0User.sub]
         );
     }
-
     const userId = user.id;
-
     const [[pb]] = await db.query(
         'SELECT COALESCE(MAX(score), 0) as personalBest FROM scores WHERE user_id = ?', [userId]
     );
-
     const [[rankRow]] = await db.query(`
         SELECT COUNT(*) + 1 AS userRank 
         FROM users 
         WHERE best_score > (SELECT best_score FROM users WHERE id = ?)
     `, [userId]);
-    
     const [[stats]] = await db.query(`
         SELECT
             COUNT(*) as gamesPlayed,
@@ -100,7 +117,6 @@ app.get('/profile', requiresAuth(), async (req, res) => {
             0 as citiesDiscovered
         FROM scores WHERE user_id = ?
     `, [userId]);
-
     const [scores] = await db.query(
         'SELECT * FROM scores WHERE user_id = ? ORDER BY score DESC LIMIT 10', [userId]
     );
@@ -115,16 +131,16 @@ app.get('/profile', requiresAuth(), async (req, res) => {
 app.post('/profile/edit', requiresAuth(), async (req, res) => {
     const auth0User = req.oidc.user;
     const { username, avatar_url } = req.body;
-    const avatarNum = avatar_url ? parseInt(avatar_url.replace(/\D/g, '')) : 1;
 
     await db.query(
-        'UPDATE users SET username = ?, avatar_url = ?, avatar = ? WHERE auth0_id = ?',
-        [username, avatar_url, avatarNum, auth0User.sub]
+        'UPDATE users SET username = ?, avatar_url = ? WHERE auth0_id = ?',
+        [username, avatar_url, auth0User.sub]
     );
     res.redirect('/profile');
 });
 
-// Leaderboard
+
+// viewing the leaderboard
 app.get('/leaderboard', async (req, res) => {
     const [results] = await db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10");
     if (results.length === 0) return res.send("Scores not found");
@@ -133,7 +149,8 @@ app.get('/leaderboard', async (req, res) => {
 
 
 
-//Takes an array of questions, returns five random ones
+
+//returns array of 5 random questions + ids from the questions table
 function takeFive(qtable){
     let quizArray =[];
     const minCeiled = Math.ceil(1);
@@ -144,7 +161,6 @@ function takeFive(qtable){
         }
     return quizArray;
 }
-
 
 //route for trivia, questions table
 app.get('/trivia', async (req, res) => {
@@ -170,5 +186,5 @@ app.post('/trivia/submit', async (req, res) => {
 
 // start server
 app.listen(port, () => {
-    console.log(`now listening on port http://localhost:3000`);
+    console.log(`now listening on port ${port}`);
 });
