@@ -7,6 +7,8 @@
 
 
     <!-- for each loop that take the quizArray and only shows the first question -->
+    <!-- q.innerArrID and q.cityAnswerID is what shows answers on screen for debugging, NEEDS TO BE REMOVED -->
+
     <% quizArray.forEach((q, index) => { %>
         <div class="question" style="<%= index === 0 ? '' : 'display:none;' %>">
             
