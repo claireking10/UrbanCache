@@ -1,3 +1,4 @@
+// imports
 require('dotenv').config();
 const { auth, requiresAuth } = require('express-openid-connect');
 const express = require("express");
