@@ -39,7 +39,8 @@
             </p>
         </div>
     </div>
-
+  
+    <!-- div for correct answer popup -->
     <div id = correctOverlay class = "popups">
         <div class = popupContent>
             <div id = "closeBtn2" class = "closerButton">
@@ -49,6 +50,8 @@
         </div>
     </div>
 
+    
+    <!-- div for incorrect answer popup -->
     <div id = incorrectOverlay class = "popups">
         <div class = popupContent>
             <div id = "closeBtn3" class = "closerButton">
@@ -58,6 +61,8 @@
         </div>
     </div>
 
+  
+    <!-- div for final score popup -->
     <div id="finalScoreOverlay" class="popups">
         <div class="popupContent">
             <h2>Congrats! You're getting there... Your final score is: <span id="finalScore"></span></h2>
@@ -166,6 +171,8 @@
                 {cityName: "Almaty", x_coor: 980, y_coor: 169.3046875},
                 {cityName: "Hormuz Island", x_coor: 913, y_coor: 248.3046875},
             ];
+
+            //this is the array of normalized coordinates. These are the coordinates that should be used as the answer.
             const cityNormalArr = [
                 {cityID: 1,cityName: "Medellin", x_coor:0.26790921906442694, y_coor:0.4583515231534227 },
                 {cityID: 2,cityName: "Aarhus", x_coor:0.5062037943762308, y_coor:0.1544235867840753 },
