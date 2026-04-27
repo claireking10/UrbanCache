@@ -15,23 +15,21 @@
                     <button class= explorerButton>Explore Cities</button>
                 </a>
             </div>
-            
         </div>
         <div class="imgdiv">
             <img class="homePhoto" id="homePhoto" src="<%= images[0] %>">
         </div>
     </div>
-<%- include('../partials/foot') %>
 
 <!-- script to make the home page image slideshow -->
 <script>
-    const images = JSON.parse('<%- JSON.stringify(images) %>');
+    const slideImages = JSON.parse('<%- JSON.stringify(images) %>');
     let index = 0;
-
     const imgElement = document.getElementById("homePhoto");
-
     setInterval(() => {
-        index = (index + 1) % images.length;
-        imgElement.src = images[index];
-    }, 9000); // edit this to change speed of slideshow, is set to 9 seconds right now
+        index = (index + 1) % slideImages.length;
+        imgElement.src = slideImages[index];
+    }, 9000);
 </script>
+
+<%- include('../partials/foot') %>
