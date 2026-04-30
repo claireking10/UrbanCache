@@ -4,6 +4,7 @@
   "description": "Hunt for culture, not just landmarks. A quiz site for lesser-known cities.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
